@@ -47,3 +47,33 @@ resource "azurerm_network_interface" "nic" {
     public_ip_address_id = "${azurerm_public_ip.pip1.id}"
   }
 }
+
+resource "azurerm_virtual_machine" "FTPUAT-vm" {
+  name = "AZMAGVMCFTPUAT"
+  location = "North Europe"
+  resource_group_name = "${azurerm_resource_group.machinerg.name}"
+  network_interface_ids = ["${azurerm_network_interface.nic.id}"]
+  vm_size = "Standard_DS1_v2"
+
+  storage_image_reference {
+   publisher = "MicrosoftWindowsServer"
+   offer     = "WindowsServer"
+   sku       = "2016-Datacenter"
+   version   = "latest"
+ }
+   storage_os_disk {
+    name              = "myosdisk1"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+    os_profile {
+    computer_name  = "hostname"
+    admin_username = "testadmin"
+    admin_password = "Password1234!"
+  }
+
+  os_profile_windows_config {
+
+  }
+}
