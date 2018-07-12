@@ -4,7 +4,7 @@ subscription_id = "${var.subscription_id}"
 
 resource "azurerm_resource_group" "machinerg" {
         name = "AZMAGRGFTPUAT"
-        location = "north europe"
+        location = "${var.location}"
 }
 
 resource "azurerm_resource_group" "vnet1rg" {
@@ -16,7 +16,7 @@ resource "azurerm_virtual_network" "vnet1" {
   resource_group_name = "${azurerm_resource_group.vnet1rg.name}"
   name = "AZMAGVNET1"
   address_space = ["10.0.0.0/23"]
-  location = "North Europe"
+  location = "${var.location}"
 }
 
 resource "azurerm_subnet" "snet11" {
@@ -28,14 +28,14 @@ resource "azurerm_subnet" "snet11" {
 
 resource "azurerm_public_ip" "pip1" {
   name = "AZMAGPIPFTPUAT"
-  location = "North Europe"
+  location = "${var.location}"
   resource_group_name = "${azurerm_resource_group.machinerg.name}"
   public_ip_address_allocation = "static"
 }
 
 resource "azurerm_network_interface" "nic" {
   name = "AZMAGNIC11"
-  location = "North Europe"
+  location = "${var.location}"
   resource_group_name = "${azurerm_resource_group.machinerg.name}"
   network_security_group_id = "${azurerm_network_security_group.ftpuat-sg.id}"
 
@@ -50,7 +50,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_virtual_machine" "FTPUAT-vm" {
   name = "AZMAGVMCFTPUAT"
-  location = "North Europe"
+  location = "${var.location}"
   resource_group_name = "${azurerm_resource_group.machinerg.name}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   vm_size = "Standard_DS1_v2"
