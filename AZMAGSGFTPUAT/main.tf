@@ -3,7 +3,7 @@ subscription_id = "${var.subscription_id}"
 }
 
 resource "azurerm_resource_group" "machinerg" {
-        name = "${var.machine_resource_group}"
+        name = "${var.ftpuat_resource_group}"
         location = "${var.location}"
 }
 
