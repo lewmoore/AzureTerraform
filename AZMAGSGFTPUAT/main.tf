@@ -4,5 +4,5 @@ subscription_id = "${var.subscription_id}"
 
 resource "azurerm_resource_group" "rg" {
         name = "AZMAGRGFTPUAT"
-        location = "westus"
+        location = "north europe"
 }
