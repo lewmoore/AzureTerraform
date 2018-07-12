@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "machinerg" {
 
 resource "azurerm_resource_group" "vnet1rg" {
   name = "AZMAGRGVNET1"
-  location = "North Europe"
+  location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "vnet1" {
@@ -69,8 +69,8 @@ resource "azurerm_virtual_machine" "FTPUAT-vm" {
   }
     os_profile {
     computer_name  = "hostname"
-    admin_username = "testadmin"
-    admin_password = "Password1234!"
+    admin_username = "${var.admin_username}"
+    admin_password = "${var.admin_password}"
   }
 
   os_profile_windows_config {
