@@ -7,14 +7,19 @@ resource "azurerm_resource_group" "machinerg" {
         location = "north europe"
 }
 
-resource "azurerm_resource_group" "vnetrg" {
+resource "azurerm_resource_group" "vnet1rg" {
   name = "AZMAGRGVNET1"
   location = "North Europe"
 }
 
 resource "azurerm_virtual_network" "vnet1" {
+  resource_group_name = "${azurerm_resource_group.vnet1rg.name}"
   name = "AZMAGVNET1"
   address_space = ["10.0.0.0/23"]
   location = "North Europe"
-  resource_group_name = "AZMAGRGVNET1"
+
+  subnet {
+    name = "AZMAGSNET11"
+    address_prefix = "10.0.0.0/24"
+  }
 }
