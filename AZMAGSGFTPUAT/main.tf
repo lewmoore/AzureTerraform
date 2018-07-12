@@ -2,7 +2,7 @@ provider "azurerm" {
 subscription_id = "${var.subscription_id}"
 }
 
-resource "azurerm_resource_group" "machinerg" {
+resource "azurerm_resource_group" "ftpuatrg" {
         name = "${var.ftpuat_resource_group}"
         location = "${var.location}"
 }
@@ -29,14 +29,14 @@ resource "azurerm_subnet" "snet11" {
 resource "azurerm_public_ip" "pip1" {
   name = "AZMAGPIPFTPUAT"
   location = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.machinerg.name}"
+  resource_group_name = "${azurerm_resource_group.ftpuatrg.name}"
   public_ip_address_allocation = "static"
 }
 
 resource "azurerm_network_interface" "nic" {
   name = "AZMAGNIC11"
   location = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.machinerg.name}"
+  resource_group_name = "${azurerm_resource_group.ftpuatrg.name}"
   network_security_group_id = "${azurerm_network_security_group.ftpuat-sg.id}"
 
   ip_configuration {
@@ -51,7 +51,7 @@ resource "azurerm_network_interface" "nic" {
 resource "azurerm_virtual_machine" "FTPUAT-vm" {
   name = "AZMAGVMCFTPUAT"
   location = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.machinerg.name}"
+  resource_group_name = "${azurerm_resource_group.ftpuatrg.name}"
   network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   vm_size = "Standard_DS1_v2"
 
