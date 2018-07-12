@@ -1,3 +1,7 @@
+terraform {
+  backend "local" {}
+}
+
 provider "azurerm" {
 subscription_id = "${var.subscription_id}"
 }
