@@ -25,12 +25,20 @@ resource "azurerm_subnet" "snet12" {
 resource "azurerm_network_interface" "prdnic" {
   name = "AZMAGNIC12"
   location = "${var.location}"
-  resource_group_name = "${data.terraform_remote_state.localstate.azurerm_resource_group_name}"
+  resource_group_name = "${azurerm_resource_group.ftpprdrg.name}"
 
   ip_configuration {
     name = "AZMAGNIC12-ip"
     subnet_id = "${azurerm_subnet.snet12.id}"
     private_ip_address_allocation = "static"
     private_ip_address = "10.0.1.4"
+    public_ip_address_id = "${azurerm_public_ip.prdpip.id}"
   }
+}
+
+resource "azurerm_public_ip" "prdpip" {
+  name = "AZMAGPIPFTPPRD"
+  location = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.ftpprdrg.name}"
+  public_ip_address_allocation = "static"
 }
