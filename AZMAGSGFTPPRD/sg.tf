@@ -1,7 +1,7 @@
 resource "azurerm_network_security_group" "ftpuat-sg" {
-    name                = "AZMAGSGFTPUAT"
+    name                = "AZMAGSGFTPPRD"
     location            = "${var.location}"
-    resource_group_name = "${azurerm_resource_group.ftpuatrg.name}"
+    resource_group_name = "${azurerm_resource_group.ftpprdrg.name}"
 
     security_rule {
       name                       = "AllowFTP"
