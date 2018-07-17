@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "ftpuat-sg" {
       destination_port_ranges    = ["21", "5000-5050"]
       destination_address_prefix = "*"
       source_port_range          = "*"
-      source_address_prefix      = "217.138.46.244"
+      source_address_prefix      = "94.31.4.69"
     }
 
     security_rule {
@@ -24,6 +24,6 @@ resource "azurerm_network_security_group" "ftpuat-sg" {
       destination_port_range     = "3389"
       destination_address_prefix = "*"
       source_port_range          = "*"
-      source_address_prefix      = "217.138.46.244"
+      source_address_prefix      = "94.31.4.69"
     }
 }
