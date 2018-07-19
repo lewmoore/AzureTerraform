@@ -74,7 +74,7 @@ resource "azurerm_virtual_machine" "KAFUAT-vm" {
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-        path     = "Users/moorel/.ssh"
+        path     = "/home/testadmin/.ssh/authorized_keys"
         key_data = "${var.public_ssh_key}"
     }
   }
